@@ -1,63 +1,86 @@
+// Elements
 const container = document.querySelector('#container');
-container.setAttribute('style', 'display: grid; grid-template-columns: repeat(16, 4.5vw); border: 1px solid black')
+container.setAttribute('style', 'display: grid; grid-template-columns: repeat(16, auto); border: 1px solid black; position: relative; width: 400px; height: 400px');
 
 const titleHeader = document.createElement('h1');
-titleHeader.textContent = "Etch A Sketch";
-titleHeader.setAttribute('style', 'margin: 0 auto; display: flex; justify-content: center;')
+titleHeader.textContent = "Etch A Sketch by Keane";
+titleHeader.setAttribute('style', 'margin: 10px auto; display: flex; justify-content: center;')
 
-document.body.setAttribute('style', 'display: flex; flex-direction: column; justify-content: center; align-items: center;')
-const titleDesc = document.createElement('p');
-titleDesc.textContent = ""
+const clearBtn = document.createElement('button');
+clearBtn.setAttribute('style', 'width: 75px; height: 30px; margin: 15px; border: 0; background-color: grey; color: white; border-radius:5px; cursor: pointer;');
+clearBtn.textContent = "CLEAR";
+
+const newGridBtn = document.createElement('button');
+newGridBtn.setAttribute('style', 'width: 95px; height: 30px; margin: 15px; border: 0; background-color: grey; color: white; border-radius:5px; cursor: pointer;');
+newGridBtn.textContent = "NEW GRID";
+
+const spanBtns = document.createElement('span');
+document.body.setAttribute('style', 'display: flex; flex-direction: column; justify-content: center; align-items: center;');
 
 document.body.insertBefore(titleHeader, container);
-document.body.insertBefore(titleDesc, titleHeader);
+document.body.append(spanBtns)
+spanBtns.append(clearBtn);
+spanBtns.append(newGridBtn);
 
-function hover(element, className){
-element.addEventListener('mouseenter', e => element.classList.add(className));
+// Default Grid
+let newDiv;
+let i;
+for (i = 0; i < 16*16; i++){
+newDiv = document.createElement('div');
+container.appendChild(newDiv);
+newDiv.setAttribute('style', 'grid-auto-flow: column;');
+newDiv.classList.add('boxes');
+
 }
+// Event Listener for Each Div
+let divBoxes = document.querySelectorAll('.boxes')
+let divsArr = Array.from(divBoxes)
 
-    let newDiv;
-    let i;
-    for (i = 0; i < 256; i++){
-    newDiv = document.createElement('div');
-    newDiv.setAttribute('style', 'width:4.5vw; height:4.5vh;');
-    newDiv.classList.add('boxes');
-    
-    container.appendChild(newDiv);
-    }
-    const divBoxes = document.querySelectorAll('.boxes')
+divsArr.forEach((item) => {
+    item.addEventListener('mouseenter', () => item.classList.add('boxcolor'))
+})
 
-    let divsArr = Array.from(divBoxes)
-    
+// Clear Button
+clearBtn.addEventListener('click', () => {
     divsArr.forEach((item) => {
-        item.addEventListener('mouseenter', () => item.classList.add('boxcolor'))
+        item.classList.remove('boxcolor');
     })
+})
 
-
-// A LIST OF ALL THE SOLUTIONS I'VE TRIED BUT DID NOT WORK
-// const colorDivs = document.querySelector('div');
-
-// document.addEventListener("mouseover", e => {
-//     if (e.target.matches('.boxes')){
-//         colorDivs.classList.add('boxcolor');
-//     }
-// })
-// const colorDivs = document.querySelector('.boxcolor');
-// document.body.addEventListener('mouseover', e => {
-//     if (e.target !== colorDivs){
-//         return
-//     }
-//     e.classList.add('boxcolor');
-// })
-
-// colorDivs.forEach(element => {
-//     element.addEventListener('mouseover', (e) => {
-//         element.classList.add('boxcolor');
-//         e.stopPropagation(); 
-//     }, {capture: false})
-// })
-// document.querySelectorAll('.gbox').forEach(item => {
-//     item.addEventListener('mouseenter', () => {
-//         item.classList.add('boxcolor');
-//     })
-// })
+// Generate New Grid
+newGridBtn.addEventListener('click', () => {
+    let existingBoxes = document.querySelectorAll('.boxes');
+    let existingArrs = Array.from(existingBoxes);
+    existingArrs.forEach((item) =>{
+        item.remove();
+    });
+    container.removeAttribute('style');
+    let gridNum = prompt("Please enter the number of squares per side (16 will generate a 16x16 grid)");
+    container.setAttribute('style', `display: grid; grid-template-columns: repeat(${gridNum}, auto); border: 1px solid black; position: relative; width: 400px; height: 400px`);
+        if (gridNum <= 100 && gridNum > 0){
+            for (let i = 0; i < gridNum*gridNum; i++){
+            newGrid = document.createElement('div');
+            newGrid.setAttribute('style', 'grid-auto-flow: column;');
+            newGrid.classList.add('boxes');
+            container.appendChild(newGrid);
+            }
+        // Event Listener for the New Divs
+        let etchGrid = document.querySelectorAll('.boxes');
+        let etchArr = Array.from(etchGrid);
+        etchArr.forEach((item) => {
+            item.addEventListener('mouseenter', () => item.classList.add('boxcolor'));  
+        })
+        // Clear Button for New Grid
+        clearBtn.addEventListener('click', () => {
+            etchArr.forEach((item) => {
+                item.classList.remove('boxcolor');
+            })
+        })
+        }
+        else if (typeof gridNum === 'string'){
+            alert("That's not a number!");
+        }
+        else {
+            alert("You have entered an invalid number! (Max is 100)");
+        }
+})
