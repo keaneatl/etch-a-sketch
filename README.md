@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">Calculator App</h1>
+  <h1 align="center">Etch A Sketch</h1>
   <p align="center">
     <strong>This is a more complicated project from The Odin Project that challenged DOM Manipulation knowledge and skills.</strong>
      <br /><br />
