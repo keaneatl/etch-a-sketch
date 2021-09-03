@@ -1,3 +1,19 @@
 .boxcolor{
-    background-color: grey;
+    background-color: #D9A859;
+}
+
+body {
+    background-color: #FDE9C9;
+    font-family: KBSketch;
+    font-size: 16px;
+}
+
+@font-face {
+    font-family: KBSketch;
+    src: url(../fonts/KBSketch.ttf);
+}
+
+@font-face {
+    font-family: Sketch;
+    src: url(../fonts/Sketch.ttf);
 }

@@ -1,18 +1,18 @@
 // Elements
 const container = document.querySelector('#container');
-container.setAttribute('style', 'display: grid; grid-template-columns: repeat(16, auto); border: 1px solid black; position: relative; width: 400px; height: 400px');
+container.setAttribute('style', 'display: grid; grid-template-columns: repeat(16, auto); border: 1px solid black; position: relative; width: 400px; height: 400px; background-color: #F5DDB5;');
 
 const titleHeader = document.createElement('h1');
 titleHeader.textContent = "Etch A Sketch by Keane";
 titleHeader.setAttribute('style', 'margin: 10px auto; display: flex; justify-content: center;')
 
 const clearBtn = document.createElement('button');
-clearBtn.setAttribute('style', 'width: 75px; height: 30px; margin: 15px; border: 0; background-color: grey; color: white; border-radius:5px; cursor: pointer;');
-clearBtn.textContent = "CLEAR";
+clearBtn.setAttribute('style', 'width: 7rem; height: 2rem; margin: 15px 15px 15px 0; border: 1px solid black; background-color: #F5DDB5; color: #000000; border-radius:5px; cursor: pointer; font-family: Sketch; font-size: 1rem;');
+clearBtn.textContent = "Clear";
 
 const newGridBtn = document.createElement('button');
-newGridBtn.setAttribute('style', 'width: 95px; height: 30px; margin: 15px; border: 0; background-color: grey; color: white; border-radius:5px; cursor: pointer;');
-newGridBtn.textContent = "NEW GRID";
+newGridBtn.setAttribute('style', 'width: 7rem; height: 2rem; margin: 15px 15px 15px 0;; border: 1px solid black; background-color: #F5DDB5; color: #000000; border-radius:5px; cursor: pointer; font-family: Sketch; font-size: 1rem;');
+newGridBtn.textContent = "New Grid";
 
 const spanBtns = document.createElement('span');
 document.body.setAttribute('style', 'display: flex; flex-direction: column; justify-content: center; align-items: center;');
@@ -59,7 +59,7 @@ newGridBtn.addEventListener('click', () => {
             });
             container.removeAttribute('style');
 
-            container.setAttribute('style', `display: grid; grid-template-columns: repeat(${gridNum}, auto); border: 1px solid black; position: relative; width: 400px; height: 400px`);
+            container.setAttribute('style', `display: grid; grid-template-columns: repeat(${gridNum}, auto); border: 1px solid black; position: relative; width: 400px; height: 400px; background-color: #F5DDB5`);
             for (let i = 0; i < gridNum*gridNum; i++){
             newGrid = document.createElement('div');
             newGrid.setAttribute('style', 'grid-auto-flow: column;');
